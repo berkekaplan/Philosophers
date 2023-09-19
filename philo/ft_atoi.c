@@ -1,27 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 15:27:45 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/09/19 16:56:32 by mkaplan          ###   ########.fr       */
+/*   Created: 2023/09/19 16:03:05 by mkaplan           #+#    #+#             */
+/*   Updated: 2023/09/19 16:03:13 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+int	ft_atoi(const char *str)
 {
-	u_int64_t	time;
-	t_philo		phil;
+	int	d;
+	int	s;
 
-	if (argc != 5 || argc != 6)
+	d = 1;
+	s = 0;
+	while (*str == '\t' || *str == '\n' || *str == '\v'
+		|| *str == '\f' || *str == '\r' || *str == ' ')
+			str++;
+	if (*str == '-')
+	{
+		d = d * -1;
+		str++;
+	}
+	else if (*str == '+')
+		str++;
+	if (*str == '-' || *str == '+')
 		return (0);
-	phil.philos = (t_argv *)malloc(sizeof(t_argv));
-	if (!check_args(argc, argv))
-		return (0);
-	argument_placer(argc, argv, phil.philos);
-	return (0);
+	while (*str >= '0' && *str <= '9')
+	{
+		s = (s * 10);
+		s = s + (*str - '0');
+		str++;
+	}
+	return (s * d);
 }

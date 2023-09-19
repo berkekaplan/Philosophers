@@ -6,7 +6,7 @@
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:50 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/09/19 15:20:07 by mkaplan          ###   ########.fr       */
+/*   Updated: 2023/09/19 16:49:53 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,21 @@
 
 typedef struct argv
 {
-    int         number_of_philosophers;
-    int         forks;
-    int         number_of_times_each_philosopher_must_eat;
-    u_int64_t   time_to_die;
-    u_int64_t   time_to_eat;
-    u_int64_t   time_to_sleep;
-}       argv_t;
+	int				number_of_philosophers;
+	int				forks;
+	int				number_of_times_each_philosopher_must_eat;
+	u_int64_t		time_to_die;
+	u_int64_t		time_to_eat;
+	u_int64_t		time_to_sleep;
+}	t_argv;
 
 typedef struct philo
 {
-    u_int64_t   start_time;
-    argv_t        *philos;
-}       philo_t;
+	u_int64_t		start_time;
+	t_argv			*philos;
+}	t_philo;
+
+void	argument_placer(int argc, char **argv, t_argv *philo);
+int		ft_atoi(const char *str);
 
 #endif

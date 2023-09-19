@@ -6,7 +6,7 @@
 #    By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/19 15:19:44 by mkaplan           #+#    #+#              #
-#    Updated: 2023/09/19 15:20:10 by mkaplan          ###   ########.fr        #
+#    Updated: 2023/09/19 15:56:12 by mkaplan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -Iincludes
+CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
