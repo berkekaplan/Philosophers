@@ -6,7 +6,7 @@
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:45:12 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/09/19 17:30:17 by mkaplan          ###   ########.fr       */
+/*   Updated: 2023/09/20 00:52:21 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,14 @@ void	argument_placer(int argc, char **argv, t_argv *philo)
 
 int	check_args(int argc, char **argv)
 {
-	if (argc == 5)
+	int	i;
+
+	i = 1;
+	while (argv[i] != '\0')
 	{
-		if (ft_atoi(argv[1]) <= 0 || ft_atoi(argv[2]) <= 0
-        || ft_atoi(argv[3]) <= 0 || ft_atoi(argv[4]) <= 0)
+		if (ft_atoi(argv[i]) <= 0)
 			return (0);
-	}
-	else
-	{
-		if (ft_atoi(argv[1]) <= 0 || ft_atoi(argv[2]) <= 0
-        || ft_atoi(argv[3]) <= 0 || ft_atoi(argv[4]) <= 0
-        || ft_atoi(argv[5]) <= 0)
-			return (0);
+		i++;
 	}
 	return (1);
 }
