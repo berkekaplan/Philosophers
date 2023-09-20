@@ -6,7 +6,7 @@
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:45:12 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/09/20 00:52:21 by mkaplan          ###   ########.fr       */
+/*   Updated: 2023/09/20 19:32:13 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,4 @@ void	argument_placer(int argc, char **argv, t_argv *philo)
 	philo->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		philo->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
-}
-
-int	check_args(int argc, char **argv)
-{
-	int	i;
-
-	i = 1;
-	while (argv[i] != '\0')
-	{
-		if (ft_atoi(argv[i]) <= 0)
-			return (0);
-		i++;
-	}
-	return (1);
 }

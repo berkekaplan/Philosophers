@@ -1,41 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   elapsed_time.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 16:03:05 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/09/20 19:41:10 by mkaplan          ###   ########.fr       */
+/*   Created: 2023/09/20 02:46:14 by mkaplan           #+#    #+#             */
+/*   Updated: 2023/09/20 15:38:03 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	check_num(const	char *str)
+uint64_t	elapsed_time(void)
 {
-	while (*str != '\0')
-	{
-		if (*str >= '0' && *str <= '9')
-			str++;
-		else
-			return (0);
-	}
-	return (1);
-}
+	static struct timeval	start_time = {0};
+	struct timeval			current_time;
+	uint64_t				elapsed_ms;
 
-int	ft_atoi(const char *str)
-{
-	int	s;
-
-	s = 0;
-	if (!check_num(str))
-		return (-1);
-	while (*str != '\0')
-	{
-		s = (s * 10);
-		s = s + (*str - '0');
-		str++;
-	}
-	return (s);
+	gettimeofday(&current_time, NULL);
+	if (start_time.tv_sec == 0 && start_time.tv_usec == 0)
+		start_time = current_time;
+	elapsed_ms = (uint64_t)(current_time.tv_sec - start_time.tv_sec) * 1000
+		+ (uint64_t)(current_time.tv_usec - start_time.tv_usec) / 1000;
+	return (elapsed_ms);
 }
