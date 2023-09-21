@@ -6,7 +6,7 @@
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:50 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/09/20 19:31:02 by mkaplan          ###   ########.fr       */
+/*   Updated: 2023/09/21 13:33:32 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ typedef struct philo
 void		argument_placer(int argc, char **argv, t_argv *philo);
 
 int			ft_atoi(const char *str);
-int			check_num(const	char *str);
+int			arg_check(int argc, char **argv);
+int			null_check(int argc, char **argv);
 
 uint64_t	elapsed_time(void);
 
