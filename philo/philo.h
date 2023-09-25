@@ -6,7 +6,7 @@
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:50 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/09/21 13:33:32 by mkaplan          ###   ########.fr       */
+/*   Updated: 2023/09/25 15:14:43 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,24 @@
 # define IS_THINKING "is thinking"
 # define DIE "died"
 
-typedef struct argv
+typedef struct s_philo
 {
+	pthread_mutex_t	*mutex_fork;
+	pthread_t		*thread;
+	uint64_t		time;
 	int				number_of_philosophers;
-	int				forks;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
 	int				number_of_times_each_philosopher_must_eat;
-	u_int64_t		time_to_die;
-	u_int64_t		time_to_eat;
-	u_int64_t		time_to_sleep;
-}	t_argv;
-
-typedef struct philo
-{
-	u_int64_t		start_time;
-	t_argv			*philos;
+	int				forks;
+	int				id;
 }	t_philo;
 
 void		argument_placer(int argc, char **argv, t_argv *philo);
 
 int			ft_atoi(const char *str);
-int			arg_check(int argc, char **argv);
-int			null_check(int argc, char **argv);
-
+int			arg_control(t_philo *philo, int argc);
 uint64_t	elapsed_time(void);
 
 #endif

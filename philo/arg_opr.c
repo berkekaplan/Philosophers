@@ -6,13 +6,13 @@
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:45:12 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/09/21 13:33:07 by mkaplan          ###   ########.fr       */
+/*   Updated: 2023/09/25 16:05:35 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	argument_placer(int argc, char **argv, t_argv *philo)
+void	argument_placer(int argc, char **argv, t_philo *philo)
 {
 	philo->number_of_philosophers = ft_atoi(argv[1]);
 	philo->time_to_die = ft_atoi(argv[2]);
@@ -22,40 +22,20 @@ void	argument_placer(int argc, char **argv, t_argv *philo)
 		philo->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
 }
 
-int	null_check(int argc, char **argv)
+int	arg_control(t_philo *philo, int argc)
 {
-	int	i;
-
-	i = 1;
-	while (i < argc)
+	if (argc == 6)
 	{
-		if (argv[i] == NULL)
+		if (philo->number_of_times_each_philosopher_must_eat == 0
+			|| philo->time_to_die == 0 || philo->number_of_philosophers == 0
+			|| philo->time_to_eat == 0 || philo->time_to_sleep == 0)
 			return (0);
-		i++;
 	}
-	return (1);
-}
-
-int	arg_check(int argc, char **argv)
-{
-	int	i1;
-	int	i2;
-
-	i1 = 1;
-	i2 = 0;
-	if (!null_check(argc, argv))
-		return (0);
-	while (i1 < argc)
+	else if (argc == 5)
 	{
-		while (argv[i1][i2] != '\0')
-		{
-			if (argv[i1][i2] >= '0' && argv[i1][i2] <= '9')
-				i2++;
-			else
-				return (0);
-		}
-		i1++;
-		i2 = 0;
+		if (philo->number_of_philosophers == 0 || philo->time_to_die == 0
+			|| philo->time_to_eat == 0 || philo->time_to_sleep == 0)
+			return (0);
 	}
 	return (1);
 }

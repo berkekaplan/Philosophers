@@ -6,7 +6,7 @@
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:27:45 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/09/21 16:31:27 by mkaplan          ###   ########.fr       */
+/*   Updated: 2023/09/25 15:27:09 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	main(int argc, char **argv)
 {
-	t_philo		phil;
+	t_philo		*philo;
 
 	if (argc != 5 || argc != 6)
 		return (0);
-	if (!arg_check(argc, argv))
-		return (0);
-	phil.philos = (t_argv *)malloc(sizeof(t_argv));
+	philo = (t_philo *)malloc(sizeof(t_philo) * ft_atoi(argv[1]));
 	elapsed_time();
-	argument_placer(argc, argv, phil.philos);
+	argument_placer(argc, argv, philo);
+	if (!arg_control(philo, argc))
+		return (0);
 	return (0);
 }
