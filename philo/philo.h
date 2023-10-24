@@ -5,44 +5,67 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 15:17:50 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/09/25 15:14:43 by mkaplan          ###   ########.fr       */
+/*   Created: 2023/10/21 15:37:08 by mkaplan           #+#    #+#             */
+/*   Updated: 2023/10/24 23:52:05 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <sys/time.h>
-# include <unistd.h>
 # include <pthread.h>
 
-# define TAKEN_FORK "has taken a fork"
-# define IS_EATING "is eating"
-# define IS_SLEEPING "is sleeping"
-# define IS_THINKING "is thinking"
-# define DIE "died"
-
-typedef struct s_philo
+typedef struct s_arg
 {
-	pthread_mutex_t	*mutex_fork;
-	pthread_t		*thread;
-	uint64_t		time;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	write;
+	pthread_mutex_t	mutex_die;
+	pthread_mutex_t	mutex_eat;
+	pthread_mutex_t	mutex_last_eat;
+	pthread_mutex_t	mutex_full;
 	int				number_of_philosophers;
+	int				number_of_must_eat;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				number_of_times_each_philosopher_must_eat;
-	int				forks;
+	int				full;
+	long			first_time;
+	int				died;
+	int				write_died;
+	int				count;
+}	t_arg;
+
+typedef struct s_philo
+{
+	pthread_t		thread;
+	int				left_f;
+	int				right_f;
 	int				id;
+	int				eat_count;
+	long			last_eat;
+	t_arg			*args;
 }	t_philo;
 
-void		argument_placer(int argc, char **argv, t_argv *philo);
-
+long		get_time(void);
 int			ft_atoi(const char *str);
-int			arg_control(t_philo *philo, int argc);
-uint64_t	elapsed_time(void);
+int			arg_check(t_arg *args, int argc);
+void		arg_parser(char **argv, t_arg *args, int argc);
+int			init_threads(t_philo *philos, int philo_count);
+void		init_philo(t_arg *args, t_philo *philos);
+int			init_forks(t_philo *philos, int philo_count);
+int			inits(t_arg	*args, t_philo *philos);
+int			eating(t_philo *philos);
+void		*dinner(void *arg);
+void		write_term(int philo_num, int ans, t_philo *philos);
+void		*view(void *arg);
+int			check_food(t_philo *philos, int i);
+void		wait_time(t_philo *philos, int wait_time);
+int			one_die_check(t_philo *philos);
+int			check(char **argv);
+void		free_memory(t_philo *philos, int ans);
+int			sleep_and_think(t_philo *philos);
+void		eating_next(t_philo *philos);
+void		view_next(t_philo *philos);
+int			free_forks(pthread_mutex_t *mutex, t_philo *philos, int ans);
 
 #endif
