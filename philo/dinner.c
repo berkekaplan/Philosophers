@@ -6,12 +6,36 @@
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:36:17 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/10/26 15:26:29 by mkaplan          ###   ########.fr       */
+/*   Updated: 2023/10/26 15:49:40 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <unistd.h>
+
+void	*dinner(void *arg)
+{
+	t_philo	*philos;
+
+	philos = (t_philo *)arg;
+	if (philos->id % 2 != 0)
+	{
+		write_term(philos->id, 4, philos);
+		usleep(1000);
+	}
+	while (1)
+	{
+		if (philos->eat_count < philos->args->number_of_must_eat
+			|| philos->args->number_of_must_eat == 0)
+		{
+			if (eating(philos))
+				break ;
+		}
+		if (sleep_and_think(philos))
+			return (NULL);
+	}
+	return (NULL);
+}
 
 int	eating(t_philo *philos)
 {
@@ -46,30 +70,6 @@ void	eating_next(t_philo *philos)
 	pthread_mutex_lock(&philos->args->mutex_eat);
 	philos->eat_count++;
 	pthread_mutex_unlock(&philos->args->mutex_eat);
-}
-
-void	*dinner(void *arg)
-{
-	t_philo	*philos;
-
-	philos = (t_philo *)arg;
-	if (philos->id % 2 != 0)
-	{
-		write_term(philos->id, 4, philos);
-		usleep(1000);
-	}
-	while (1)
-	{
-		if (philos->eat_count < philos->args->number_of_must_eat
-			|| philos->args->number_of_must_eat == 0)
-		{
-			if (eating(philos))
-				break ;
-		}
-		if (sleep_and_think(philos))
-			return (NULL);
-	}
-	return (NULL);
 }
 
 int	sleep_and_think(t_philo *philos)

@@ -6,7 +6,7 @@
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:37:16 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/10/26 14:44:26 by mkaplan          ###   ########.fr       */
+/*   Updated: 2023/10/26 15:51:12 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,33 @@ void	*view(void *arg)
 			break ;
 	}
 	return (NULL);
+}
+
+int	check_food(t_philo *philos, int i)
+{
+	if (philos->args->number_of_must_eat > 0)
+	{
+		while (i < philos->args->number_of_philosophers)
+		{
+			pthread_mutex_lock(&philos->args->mutex_eat);
+			if (philos[i].eat_count >= philos->args->number_of_must_eat)
+			{
+				pthread_mutex_unlock(&philos->args->mutex_eat);
+				philos->args->full++;
+			}
+			else
+				pthread_mutex_unlock(&philos->args->mutex_eat);
+			i++;
+		}
+		if (philos->args->full >= philos->args->number_of_philosophers)
+		{
+			pthread_mutex_lock(&philos->args->mutex_die);
+			philos->args->died = 1;
+			pthread_mutex_unlock(&philos->args->mutex_die);
+			return (1);
+		}
+	}
+	return (0);
 }
 
 void	view_next(t_philo *philos)
