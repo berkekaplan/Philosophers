@@ -6,13 +6,12 @@
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:36:44 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/10/25 00:03:10 by mkaplan          ###   ########.fr       */
+/*   Updated: 2023/10/26 14:44:12 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <stdlib.h>
-#include <pthread.h>
 
 int	init_threads(t_philo *philos, int philo_count)
 {

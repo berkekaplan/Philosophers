@@ -6,13 +6,12 @@
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:36:50 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/10/24 23:58:39 by mkaplan          ###   ########.fr       */
+/*   Updated: 2023/10/26 14:44:07 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <stdlib.h>
-#include <pthread.h>
 
 void	free_memory(t_philo *philos, int ans)
 {

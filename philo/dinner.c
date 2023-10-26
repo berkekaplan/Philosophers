@@ -6,13 +6,12 @@
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:36:17 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/10/24 23:39:51 by mkaplan          ###   ########.fr       */
+/*   Updated: 2023/10/26 15:26:29 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <unistd.h>
-#include <pthread.h>
 
 int	eating(t_philo *philos)
 {
@@ -47,26 +46,6 @@ void	eating_next(t_philo *philos)
 	pthread_mutex_lock(&philos->args->mutex_eat);
 	philos->eat_count++;
 	pthread_mutex_unlock(&philos->args->mutex_eat);
-}
-
-void	wait_time(t_philo *philos, int wait_time)
-{
-	long	time;
-
-	time = get_time();
-	pthread_mutex_lock(&philos->args->mutex_die);
-	while (!philos->args->died)
-	{
-		pthread_mutex_unlock(&philos->args->mutex_die);
-		usleep(40);
-		if (get_time() - time >= wait_time)
-		{
-			pthread_mutex_lock(&philos->args->mutex_die);
-			break ;
-		}
-		pthread_mutex_lock(&philos->args->mutex_die);
-	}
-	pthread_mutex_unlock(&philos->args->mutex_die);
 }
 
 void	*dinner(void *arg)

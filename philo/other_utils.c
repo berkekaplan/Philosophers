@@ -6,13 +6,13 @@
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:37:03 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/10/24 22:12:45 by mkaplan          ###   ########.fr       */
+/*   Updated: 2023/10/26 14:43:48 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <pthread.h>
 #include <sys/time.h>
+#include <unistd.h>
 
 int	ft_atoi(const char *str)
 {
@@ -61,4 +61,24 @@ long	get_time(void)
 
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+void	wait_time(t_philo *philos, int wait_time)
+{
+	long	time;
+
+	time = get_time();
+	pthread_mutex_lock(&philos->args->mutex_die);
+	while (!philos->args->died)
+	{
+		pthread_mutex_unlock(&philos->args->mutex_die);
+		usleep(40);
+		if (get_time() - time >= wait_time)
+		{
+			pthread_mutex_lock(&philos->args->mutex_die);
+			break ;
+		}
+		pthread_mutex_lock(&philos->args->mutex_die);
+	}
+	pthread_mutex_unlock(&philos->args->mutex_die);
 }

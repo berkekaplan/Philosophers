@@ -6,12 +6,11 @@
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:37:16 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/10/21 15:37:17 by mkaplan          ###   ########.fr       */
+/*   Updated: 2023/10/26 14:44:26 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <pthread.h>
 
 void	*view(void *arg)
 {
