@@ -6,7 +6,7 @@
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:37:08 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/10/24 23:52:05 by mkaplan          ###   ########.fr       */
+/*   Updated: 2023/10/30 18:28:14 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void		free_memory(t_philo *philos, int ans);
 int			sleep_and_think(t_philo *philos);
 void		eating_next(t_philo *philos);
 void		view_next(t_philo *philos);
-int			free_forks(pthread_mutex_t *mutex, t_philo *philos, int ans);
+int			free_forks(t_philo *philos, int ans);
+int			free_forks2(t_philo *philos, int ans);
 
 #endif

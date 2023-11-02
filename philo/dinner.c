@@ -6,7 +6,7 @@
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:36:17 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/10/26 15:49:40 by mkaplan          ###   ########.fr       */
+/*   Updated: 2023/10/30 13:43:32 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	*dinner(void *arg)
 				break ;
 		}
 		if (sleep_and_think(philos))
-			return (NULL);
+			break ;
 	}
 	return (NULL);
 }

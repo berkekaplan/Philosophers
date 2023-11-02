@@ -6,7 +6,7 @@
 /*   By: mkaplan <@student.42kocaeli.com.tr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:36:44 by mkaplan           #+#    #+#             */
-/*   Updated: 2023/10/26 14:44:12 by mkaplan          ###   ########.fr       */
+/*   Updated: 2023/10/30 19:00:05 by mkaplan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	init_threads(t_philo *philos, int philo_count)
 	i = 0;
 	while (i < philo_count)
 	{
-		if (pthread_create(&philos[i].thread, NULL, &dinner, &philos[i]) != 0)
+		if (pthread_create(&philos[i].thread, NULL, dinner, &philos[i]) != 0)
 			return (1);
 		i++;
 	}
@@ -65,15 +65,15 @@ int	init_forks(t_philo *philos, int philo_count)
 	if (!philos->args->forks)
 		return (free(philos), 1);
 	if (pthread_mutex_init(&philos->args->write, NULL) != 0)
-		return (free_forks(&philos->args->write, philos, 0));
+		return (free_forks(philos, 0));
 	if (pthread_mutex_init(&philos->args->mutex_die, NULL) != 0)
-		return (free_forks(&philos->args->mutex_die, philos, 0));
+		return (free_forks(philos, 1));
 	if (pthread_mutex_init(&philos->args->mutex_eat, NULL) != 0)
-		return (free_forks(&philos->args->mutex_eat, philos, 0));
+		return (free_forks(philos, 2));
 	if (pthread_mutex_init(&philos->args->mutex_last_eat, NULL) != 0)
-		return (free_forks(&philos->args->mutex_last_eat, philos, 0));
+		return (free_forks2(philos, 3));
 	if (pthread_mutex_init(&philos->args->mutex_full, NULL) != 0)
-		return (free_forks(&philos->args->mutex_full, philos, 0));
+		return (free_forks2(philos, 4));
 	i = 0;
 	while (i < philo_count)
 	{
